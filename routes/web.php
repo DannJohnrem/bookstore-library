@@ -28,16 +28,15 @@ Route::middleware('auth')->group(function () {
     Route::view('about', 'about')->name('about');
 
     Route::get('users', [UserController::class, 'index'])->name('users.index');
+    // Route::get('/users/export', [UserController::class, 'export'])->name('users.export');
 
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-
-    Route::resource('books', BookController::class);
-
     // Import and Export routes
     Route::get('/books/export', [BookController::class, 'export'])->name('books.export');
     Route::post('/books/import', [BookController::class, 'import'])->name('books.import');
+    Route::resource('books', BookController::class);
 });
 
 require __DIR__ . '/auth.php';
